@@ -25,4 +25,4 @@ $phpench = new PHPench();
 // With the second parameter you can specify
 // the start, end and step for each call
 $phpench->plot($benchFunction, range(1,pow(2,16), 1024));
-$phpench->save('test.png');
+$phpench->save('test.png', 1024, 768);
