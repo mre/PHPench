@@ -1,10 +1,6 @@
 <?php
 
-include ('PHPench.php');
-
 require_once __DIR__.'/vendor/autoload.php';
-use mre\PHPench\PHPench;
-
 
 /**
  * This is the function that we want to benchmark
@@ -19,7 +15,7 @@ $benchFunction = function($arrSize) {
 };
 
 // Create a new benchmark instance
-$phpench = new PHPench();
+$phpench = new mre\PHPench();
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

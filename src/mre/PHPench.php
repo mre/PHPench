@@ -1,12 +1,11 @@
 <?php
 
-namespace mre\PHPench;
+namespace mre;
 
-require_once __DIR__.'/vendor/autoload.php';
 use Gregwar\GnuPlot\GnuPlot;
 use PHP_Timer;
 
-class PHPench 
+class PHPench
 {
   public function __construct() {
     $this->plot = new GnuPlot;
