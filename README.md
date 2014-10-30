@@ -6,13 +6,13 @@ out of the result.
 
 ## Installation
 
-1.) Add this package to your composer.json
-2.) Install gnuplot (`$ brew install gnuplot`)
-3.) Look at the example.php for usage
+1. Add this package to your composer.json
+2. Install gnuplot (`$ brew install gnuplot`)
+3. Look at the example.php for usage
 
 ## Example
 
-´´´
+```
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
@@ -53,4 +53,4 @@ $phpench->plot($benchFunction2, range(1,pow(2,16), 1024), 'array_unique');
 $phpench->save('test.png', 1024, 768);
 ```
 
-![A pretty graph](https://github.com/mre/PHPench/blob/master/test.png)
+![A pretty graph](test.png)
