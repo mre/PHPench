@@ -75,4 +75,4 @@ $phpench->plot(range(1,pow(2,16), 1024));
 $phpench->save('test.png', 1024, 768);
 ```
 
-![A pretty graph](test.png)
+![A pretty graph](graph.gif)
