@@ -30,9 +30,12 @@ $benchFunction2 = function ($arrSize) {
 // Create a new benchmark instance
 $phpench = new mre\PHPench('Compare array_flip and array_unique');
 
+// Add your test to the instance
+$phpench->addTest($benchFunction1, 'array_flip');
+$phpench->addTest($benchFunction2, 'array_unique');
+
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify
 // the start, end and step for each call
-$phpench->plot($benchFunction1, range(1,pow(2,16), 1024), 'array_flip');
-$phpench->plot($benchFunction2, range(1,pow(2,16), 1024), 'array_unique');
+$phpench->plot(range(1,pow(2,16), 1024));
 $phpench->save('test.png', 1024, 768);
