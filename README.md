@@ -31,7 +31,7 @@ $ brew install gnuplot --with-x
 
 ## Example
 
-´´´PHP
+```PHP
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
