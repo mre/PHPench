@@ -3,6 +3,7 @@
 namespace mre;
 
 use Gregwar\GnuPlot\GnuPlot;
+use mre\PHPench\TestInterface;
 use PHP_Timer;
 
 /**
@@ -32,8 +33,12 @@ class PHPench
      *
      * @param callable $test
      */
-    public function addTest(\Closure $test, $title)
+    public function addTest($test, $title)
     {
+        if (!$test instanceof \Closure && !$test instanceof TestInterface) {
+            throw new \InvalidArgumentException('Test must be closure or implement TestInterface');
+        }
+
         $this->tests[] = $test;
         $this->titles[] = $title;
     }
@@ -82,9 +87,17 @@ class PHPench
 
     private function bench($benchFunction, $i, $plotIndex)
     {
-        PHP_Timer::start();
-        $benchFunction($i);
-        $time = PHP_Timer::stop();
+        if ($benchFunction instanceof TestInterface) {
+            $benchFunction->setUp($i);
+            PHP_Timer::start();
+            $benchFunction->execute();
+            $time = PHP_Timer::stop();
+        } else {
+            PHP_Timer::start();
+            $benchFunction($i);
+            $time = PHP_Timer::stop();
+        }
+
         $this->plot->push($i, $time, $plotIndex);
     }
 }
