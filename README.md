@@ -6,13 +6,32 @@ out of the result.
 
 ## Installation
 
-1. Add this package to your composer.json
-2. Install gnuplot (`$ brew install gnuplot`)
-3. Look at the example.php for usage
+1.) Add this package to your composer.json
+
+```
+{
+    "require": {
+      "mre/phpench": "*@dev"
+    }
+}
+```
+
+2.) Install gnuplot
+
+For mac you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
+```
+Without X11 support:
+$ brew install gnuplot
+
+With X11 supprt (recommended!):
+$ brew install gnuplot --with-x
+```
+
+3.) Look at the example.php for usage
 
 ## Example
 
-```
+´´´PHP
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
