@@ -17,7 +17,8 @@ use PHP_Timer;
  */
 class PHPench
 {
-    private $plotIndex = -1;
+    private $tests = [];
+    private $titles = [];
 
     public function __construct($title = 'untitled')
     {
@@ -27,21 +28,35 @@ class PHPench
     }
 
     /**
-     * Plots the graph for the given function.
+     * Adds an test to the bench instance
      *
-     * @param \Closure $benchFunction
+     * @param callable $test
+     */
+    public function addTest(\Closure $test, $title)
+    {
+        $this->tests[] = $test;
+        $this->titles[] = $title;
+    }
+
+    /**
+     * Plots the graph for all added tests
+     *
      * @param array    $benchRange
-     * @param string   $title
      * @param bool     $keepAlive
      */
-    public function plot(\Closure $benchFunction, array $benchRange, $title, $keepAlive = false)
+    public function plot(array $benchRange, $keepAlive = false)
     {
-        $this->plotIndex++;
-
-        $this->plot->setTitle($this->plotIndex, $title);
+        // set titles
+        foreach ($this->titles as $index => $title) {
+            $this->plot->setTitle($index, $title);
+        }
 
         foreach ($benchRange as $i) {
-            $this->bench($benchFunction, $i, $this->plotIndex);
+            foreach ($this->tests as $index => $test) {
+                $this->bench($test, $i, $index);
+            }
+
+            $this->plot->refresh();
         }
 
         if ($keepAlive) {
@@ -71,6 +86,5 @@ class PHPench
         $benchFunction($i);
         $time = PHP_Timer::stop();
         $this->plot->push($i, $time, $plotIndex);
-        $this->plot->refresh();
     }
 }
