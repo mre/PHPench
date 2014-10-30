@@ -3,24 +3,28 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 // setup our test data
-function createArray($arrSize) {
-  $test=array();
-  for($i=1; $i<$arrSize; $i++) {
-      $test[$i]= $arrSize % $i;
-  }
+function createArray($arrSize)
+{
+    $test = array();
+    for ($i=1; $i<$arrSize; $i++) {
+        $test[$i]= $arrSize % $i;
+    }
+
   return $test;
 }
 
 /**
- * This is the function that we want to benchmark
+ * These are the functions that we want to benchmark
+ *
+ * This test compares array_flip vs array_unique
  */
-$benchFunction1 = function($arrSize) {
-  $test = createArray($arrSize);
-  $test = array_flip(array_flip($test));
+$benchFunction1 = function ($arrSize) {
+    $test = createArray($arrSize);
+    $test = array_flip(array_flip($test));
 };
-$benchFunction2 = function($arrSize) {
-  $test = createArray($arrSize);
-  $test = array_unique($test);
+$benchFunction2 = function ($arrSize) {
+    $test = createArray($arrSize);
+    $test = array_unique($test);
 };
 
 // Create a new benchmark instance
