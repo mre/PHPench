@@ -84,7 +84,7 @@ $phpench->save('test.png', 1024, 768);
 
 ## Maintainers
 
-Matthias Endler (@matthiasendler)
+Matthias Endler (@matthiasendler)  
 Markus Poerschke (@markuspoerschke)
 
 ## License
