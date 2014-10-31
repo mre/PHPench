@@ -18,7 +18,7 @@ out of the result.
 
 2.) Install gnuplot
 
-For mac you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
+For *Mac OS X* you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
 ```
 Without X11 support:
 $ brew install gnuplot
@@ -27,7 +27,12 @@ With X11 supprt (recommended!):
 $ brew install gnuplot --with-x
 ```
 
-3.) Look at the example.php for usage
+For *Linux* use your package manager.
+```
+apt-get install gnuplot
+```
+
+3.) Look at the examples for usage
 
 ## Example
 
@@ -76,3 +81,12 @@ $phpench->save('test.png', 1024, 768);
 ```
 
 ![A pretty graph](graph.gif)
+
+## Maintainers
+
+Matthias Endler (@matthiasendler)
+Markus Poerschke (@markuspoerschke)
+
+## License
+
+Apache License Version 2.0
