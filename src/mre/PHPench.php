@@ -26,6 +26,8 @@ class PHPench
         $this->plot = new GnuPlot();
         $this->plot->reset();
         $this->plot->setGraphTitle($title);
+        $this->plot->setXLabel('run');
+        $this->plot->setYLabel('time');
     }
 
     /**
