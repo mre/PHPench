@@ -39,7 +39,7 @@ class TestArrayUnique extends AbstractTest
 }
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\AverageAggregator);
+$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
 $phpench->setTitle('Compare array_flip and array_unique');
 
 // Add your test to the instance
