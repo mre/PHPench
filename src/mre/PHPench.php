@@ -21,6 +21,13 @@ class PHPench
     private $tests = [];
     private $titles = [];
 
+    /**
+     * Contains an array with the run numbers
+     *
+     * @var array
+     */
+    private $input = [];
+
     public function __construct($title = 'untitled')
     {
         $this->plot = new GnuPlot();
@@ -48,17 +55,16 @@ class PHPench
     /**
      * Plots the graph for all added tests
      *
-     * @param array    $benchRange
-     * @param bool     $keepAlive
+     * @param bool $keepAlive
      */
-    public function plot(array $benchRange, $keepAlive = false)
+    public function run($keepAlive = false)
     {
         // set titles
         foreach ($this->titles as $index => $title) {
             $this->plot->setTitle($index, $title);
         }
 
-        foreach ($benchRange as $i) {
+        foreach ($this->input as $i) {
             foreach ($this->tests as $index => $test) {
                 $this->bench($test, $i, $index);
             }
@@ -85,6 +91,14 @@ class PHPench
         $this->plot->setWidth($width)
                    ->setHeight($height)
                    ->writePng($filename);
+    }
+
+    /**
+     * @param array $input
+     */
+    public function setInput(array $input)
+    {
+        $this->input = $input;
     }
 
     private function bench($benchFunction, $i, $plotIndex)

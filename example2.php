@@ -48,5 +48,6 @@ $phpench->addTest(new TestArrayUnique, 'array_unique');
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify
 // the start, end and step for each call
-$phpench->plot(range(1,pow(2,16), 1024));
+$phpench->setInput(range(1,pow(2,16), 1024));
+$phpench->run();
 $phpench->save('test2.png', 1024, 768);
