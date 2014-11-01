@@ -28,7 +28,8 @@ $benchFunction2 = function ($arrSize) {
 };
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench('Compare array_flip and array_unique');
+$phpench = new mre\PHPench();
+$phpench->setTitle('Compare array_flip and array_unique');
 
 // Add your test to the instance
 $phpench->addTest($benchFunction1, 'array_flip');

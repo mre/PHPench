@@ -3,6 +3,8 @@
 namespace mre;
 
 use Gregwar\GnuPlot\GnuPlot;
+use mre\PHPench\Aggregator\SimpleAggregator;
+use mre\PHPench\AggregatorInterface;
 use mre\PHPench\TestInterface;
 use PHP_Timer;
 
@@ -22,19 +24,41 @@ class PHPench
     private $titles = [];
 
     /**
+     * The title of the benchmark
+     *
+     * @var string
+     */
+    private $title = 'untitled';
+
+    /**
      * Contains an array with the run numbers
      *
      * @var array
      */
     private $input = [];
 
-    public function __construct($title = 'untitled')
+    /**
+     * @var AggregatorInterface
+     */
+    private $aggregator;
+
+    /**
+     * The number of times the bench should be executed.
+     *
+     * This can increase the precise.
+     *
+     * @var int
+     */
+    private $repetitions = 1;
+
+    public function __construct(AggregatorInterface $aggregator = null)
     {
+        if ($aggregator === null) {
+            $aggregator = new SimpleAggregator();
+        }
+
         $this->plot = new GnuPlot();
-        $this->plot->reset();
-        $this->plot->setGraphTitle($title);
-        $this->plot->setXLabel('run');
-        $this->plot->setYLabel('time');
+        $this->aggregator = $aggregator;
     }
 
     /**
@@ -59,18 +83,19 @@ class PHPench
      */
     public function run($keepAlive = false)
     {
-        // set titles
-        foreach ($this->titles as $index => $title) {
-            $this->plot->setTitle($index, $title);
-        }
+        for ($r = 1; $r <= $this->repetitions; $r++)
+        {
+            foreach ($this->input as $i) {
+                foreach ($this->tests as $index => $test) {
+                    $this->bench($test, $i, $index);
+                }
 
-        foreach ($this->input as $i) {
-            foreach ($this->tests as $index => $test) {
-                $this->bench($test, $i, $index);
+                $this->plot();
             }
-
-            $this->plot->refresh();
         }
+
+        // make sure that the graph will be plotted at the very end...
+        $this->plot();
 
         if ($keepAlive) {
             // Wait for user input to close
@@ -101,7 +126,44 @@ class PHPench
         $this->input = $input;
     }
 
-    private function bench($benchFunction, $i, $plotIndex)
+    /**
+     * @param $repetitions
+     */
+    public function setRepetitions($repetitions)
+    {
+        $this->repetitions = $repetitions;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    private function plot()
+    {
+        $this->plot->reset();
+        $this->plot->setGraphTitle($this->title);
+        $this->plot->setXLabel('run');
+        $this->plot->setYLabel('time');
+
+        // set titles
+        foreach ($this->titles as $index => $title) {
+            $this->plot->setTitle($index, $title);
+        }
+
+        foreach ($this->aggregator->getData() as $i => $results) {
+            foreach ($results as $index => $resultValue) {
+                $this->plot->push($i, $resultValue, $index);
+            }
+        }
+
+        $this->plot->refresh();
+    }
+
+    private function bench($benchFunction, $i, $index)
     {
         if ($benchFunction instanceof TestInterface) {
             $benchFunction->setUp($i);
@@ -114,6 +176,6 @@ class PHPench
             $time = PHP_Timer::stop();
         }
 
-        $this->plot->push($i, $time, $plotIndex);
+        $this->aggregator->push($i, $index, $time);
     }
 }

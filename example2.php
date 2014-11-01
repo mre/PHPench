@@ -39,7 +39,8 @@ class TestArrayUnique extends AbstractTest
 }
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench('Compare array_flip and array_unique');
+$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\AverageAggregator);
+$phpench->setTitle('Compare array_flip and array_unique');
 
 // Add your test to the instance
 $phpench->addTest(new TestArrayFlip, 'array_flip');
@@ -49,5 +50,6 @@ $phpench->addTest(new TestArrayUnique, 'array_unique');
 // With the second parameter you can specify
 // the start, end and step for each call
 $phpench->setInput(range(1,pow(2,16), 1024));
+$phpench->setRepetitions(4);
 $phpench->run();
 $phpench->save('test2.png', 1024, 768);
