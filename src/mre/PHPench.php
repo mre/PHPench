@@ -49,7 +49,7 @@ class PHPench
      *
      * @var int
      */
-    private $repetitions = 1;
+    private $repetitions = 3;
 
     public function __construct(AggregatorInterface $aggregator = null)
     {
