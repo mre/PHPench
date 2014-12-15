@@ -69,7 +69,9 @@ class TestQuickSort extends AbstractTest
 
 // Create a new benchmark instance
 $phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
-$phpench->setTitle('Sorting Algorithms');
+$output = new \mre\PHPench\Output\GnuPlotOutput('sorting_algorithms.png', 1024, 768);
+$output->setTitle('Sorting Algorithms');
+$phpench->setOutput($output);
 
 // Add your test to the instance
 $phpench->addTest(new TestBubbleSort, 'bubblesort');
@@ -80,4 +82,3 @@ $phpench->addTest(new TestQuickSort, 'quicksort');
 // the start, end and step for each call
 $phpench->setInput(range(1 ,pow(2,16), 128));
 $phpench->run();
-$phpench->save('sorting_algorithms.png', 1024, 768);

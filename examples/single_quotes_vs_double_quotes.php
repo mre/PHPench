@@ -27,7 +27,11 @@ class TestDoubleQuotes extends AbstractTest
 
 // Create a new benchmark instance
 $phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
-$phpench->setTitle('Compare single quote and double quote strings');
+
+$output = new \mre\PHPench\Output\GnuPlotOutput('test4.png',  1024, 768);
+$output->setTitle('Compare single quote and double quote strings');
+$phpench->setOutput($output);
+
 
 // Add your test to the instance
 $phpench->addTest(new TestSingleQuotes, 'single_quotes');
