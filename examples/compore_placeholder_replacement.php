@@ -63,14 +63,16 @@ class TestPregReplaceCallback extends AbstractTest
 {
     public function execute() {
         $this->text = preg_replace_callback('/(\$[\w\d]+)\s/', function($matches) {
-            return isset($this->placeholder[$matches[0]]) ? $this->placeholder[$matches[0]] : $matches[0];
+            return isset($this->placeholders[$matches[0]]) ? $this->placeholders[$matches[0]] : $matches[0];
         }, $this->text);
     }
 }
 
 // Create a new benchmark instance
 $phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
-$phpench->setTitle('Compare placeholder replacement');
+$output = new \mre\PHPench\Output\GnuPlotOutput('test3.png', 1024, 768);
+$output->setTitle('Compare placeholder replacement');
+$phpench->setOutput($output);
 
 // Add your test to the instance
 $phpench->addTest(new TestStringReplaceForeach, 'TestStringReplaceForeach');
@@ -83,4 +85,3 @@ $phpench->addTest(new TestPregReplaceCallback, 'TestPregReplaceCallback');
 $phpench->setInput(range(0, 200, 2));
 $phpench->setRepetitions(10);
 $phpench->run();
-$phpench->save('test3.png', 1024, 768);

@@ -2,9 +2,9 @@
 
 namespace mre;
 
-use Gregwar\GnuPlot\GnuPlot;
 use mre\PHPench\Aggregator\SimpleAggregator;
 use mre\PHPench\AggregatorInterface;
+use mre\PHPench\Output\OutputInterface;
 use mre\PHPench\TestInterface;
 use PHP_Timer;
 
@@ -24,11 +24,9 @@ class PHPench
     private $titles = [];
 
     /**
-     * The title of the benchmark
-     *
-     * @var string
+     * @var OutputInterface
      */
-    private $title = 'untitled';
+    private $output = null;
 
     /**
      * Contains an array with the run numbers
@@ -57,8 +55,17 @@ class PHPench
             $aggregator = new SimpleAggregator();
         }
 
-        $this->plot = new GnuPlot();
         $this->aggregator = $aggregator;
+    }
+
+    /**
+     * sets output interface
+     *
+     * @param OutputInterface $output
+     */
+    public function setOutput(OutputInterface $output)
+    {
+        $this->output = $output;
     }
 
     /**
@@ -73,7 +80,7 @@ class PHPench
         }
 
         $this->tests[] = $test;
-        $this->titles[] = $title;
+        $this->output->addTest($title);
     }
 
     /**
@@ -90,12 +97,11 @@ class PHPench
                     $this->bench($test, $i, $index);
                 }
 
-                $this->plot();
+                $this->output->update($this->aggregator, $i);
             }
         }
 
-        // make sure that the graph will be plotted at the very end...
-        $this->plot();
+        $this->output->finalize($this->aggregator, $i);
 
         if ($keepAlive) {
             // Wait for user input to close
@@ -104,19 +110,6 @@ class PHPench
         }
     }
 
-    /**
-     * This method will save the graph as a PNG image
-     *
-     * @param string $filename
-     * @param int    $width
-     * @param int    $height
-     */
-    public function save($filename, $width = 400, $height = 300)
-    {
-        $this->plot->setWidth($width)
-                   ->setHeight($height)
-                   ->writePng($filename);
-    }
 
     /**
      * @param array $input
@@ -142,26 +135,7 @@ class PHPench
         $this->title = $title;
     }
 
-    private function plot()
-    {
-        $this->plot->reset();
-        $this->plot->setGraphTitle($this->title);
-        $this->plot->setXLabel('run');
-        $this->plot->setYLabel('time');
 
-        // set titles
-        foreach ($this->titles as $index => $title) {
-            $this->plot->setTitle($index, $title);
-        }
-
-        foreach ($this->aggregator->getData() as $i => $results) {
-            foreach ($results as $index => $resultValue) {
-                $this->plot->push($i, $resultValue, $index);
-            }
-        }
-
-        $this->plot->refresh();
-    }
 
     private function bench($benchFunction, $i, $index)
     {
