@@ -1,5 +1,7 @@
 # PHPench
 
+![A pretty graph](graph.gif)
+
 PHPench creates a graphical output for a PHP benchmark.
 Plot the runtime of any function in realtime with GnuPlot and create an image
 out of the result.
@@ -80,8 +82,6 @@ $phpench->setInput(range(1,pow(2,16), 1024));
 $phpench->run();
 $phpench->save('test.png', 1024, 768);
 ```
-
-![A pretty graph](graph.gif)
 
 ## Maintainers
 
