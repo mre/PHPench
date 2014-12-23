@@ -23,7 +23,7 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
     }
 }
 
-class TestBubbleSort extends AbstractBenchmark
+class BenchmarkBubbleSort extends AbstractBenchmark
 {
     private function bubblesort($arr = array ()) {
         $anz = count($arr);
@@ -45,7 +45,7 @@ class TestBubbleSort extends AbstractBenchmark
     }
 }
 
-class TestQuickSort extends AbstractBenchmark
+class BenchmarkQuickSort extends AbstractBenchmark
 {
     private function quicksort($seq) {
         if(!count($seq)) return $seq;
@@ -74,8 +74,8 @@ $output->setTitle('Sorting Algorithms');
 $phpench->setOutput($output);
 
 // Add your test to the instance
-$phpench->addBenchmark(new TestBubbleSort, 'bubblesort');
-$phpench->addBenchmark(new TestQuickSort, 'quicksort');
+$phpench->addBenchmark(new BenchmarkBubbleSort, 'bubblesort');
+$phpench->addBenchmark(new BenchmarkQuickSort, 'quicksort');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

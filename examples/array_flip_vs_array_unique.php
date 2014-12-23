@@ -24,14 +24,14 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
     }
 }
 
-class TestArrayFlip extends AbstractBenchmark
+class BenchmarkArrayFlip extends AbstractBenchmark
 {
     public function execute() {
         $test = array_flip(array_flip($this->test));
     }
 }
 
-class TestArrayUnique extends AbstractBenchmark
+class BenchmarkArrayUnique extends AbstractBenchmark
 {
     public function execute() {
         $test = array_unique($this->test);
@@ -51,8 +51,8 @@ $oOutput->setTitle('Compare array_flip and array_unique');
 $phpench->setOutput($oOutput);
 
 // Add your test to the instance
-$phpench->addBenchmark(new TestArrayFlip, 'array_flip');
-$phpench->addBenchmark(new TestArrayUnique, 'array_unique');
+$phpench->addBenchmark(new BenchmarkArrayFlip, 'array_flip');
+$phpench->addBenchmark(new BenchmarkArrayUnique, 'array_unique');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

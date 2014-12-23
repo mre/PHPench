@@ -43,7 +43,7 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
     }
 }
 
-class TestStringReplaceForeach extends AbstractBenchmark
+class BenchmarkStringReplaceForeach extends AbstractBenchmark
 {
     public function execute() {
         foreach ($this->placeholders as $search => $replace) {
@@ -52,14 +52,14 @@ class TestStringReplaceForeach extends AbstractBenchmark
     }
 }
 
-class TestStringReplaceArrayValue extends AbstractBenchmark
+class BenchmarkStringReplaceArrayValue extends AbstractBenchmark
 {
     public function execute() {
         $this->text = str_replace(array_keys($this->placeholders), array_values($this->placeholders), $this->text);
     }
 }
 
-class TestPregReplaceCallback extends AbstractBenchmark
+class BenchmarkPregReplaceCallback extends AbstractBenchmark
 {
     public function execute() {
         $this->text = preg_replace_callback('/(\$[\w\d]+)\s/', function($matches) {
@@ -75,9 +75,9 @@ $output->setTitle('Compare placeholder replacement');
 $phpench->setOutput($output);
 
 // Add your test to the instance
-$phpench->addBenchmark(new TestStringReplaceForeach, 'TestStringReplaceForeach');
-$phpench->addBenchmark(new TestStringReplaceArrayValue, 'TestStringReplaceArrayValue');
-$phpench->addBenchmark(new TestPregReplaceCallback, 'TestPregReplaceCallback');
+$phpench->addBenchmark(new BenchmarkStringReplaceForeach, 'TestStringReplaceForeach');
+$phpench->addBenchmark(new BenchmarkStringReplaceArrayValue, 'TestStringReplaceArrayValue');
+$phpench->addBenchmark(new BenchmarkPregReplaceCallback, 'TestPregReplaceCallback');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

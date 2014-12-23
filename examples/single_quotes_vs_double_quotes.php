@@ -11,14 +11,14 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
     }
 }
 
-class TestSingleQuotes extends AbstractBenchmark
+class BenchmarkSingleQuotes extends AbstractBenchmark
 {
     public function execute() {
       $test = 'hello' . 'this' . 'is' . 'a' . 'test';
     }
 }
 
-class TestDoubleQuotes extends AbstractBenchmark
+class BenchmarkDoubleQuotes extends AbstractBenchmark
 {
     public function execute() {
       $test = "hello" . "this" . "is" . "a" . "test";
@@ -34,8 +34,8 @@ $phpench->setOutput($output);
 
 
 // Add your test to the instance
-$phpench->addBenchmark(new TestSingleQuotes, 'single_quotes');
-$phpench->addBenchmark(new TestDoubleQuotes, 'double_quotes');
+$phpench->addBenchmark(new BenchmarkSingleQuotes, 'single_quotes');
+$phpench->addBenchmark(new BenchmarkDoubleQuotes, 'double_quotes');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify
