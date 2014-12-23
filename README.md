@@ -6,36 +6,6 @@ PHPench creates a graphical output for a PHP benchmark.
 Plot the runtime of any function in realtime with GnuPlot and create an image
 out of the result.
 
-## Installation
-
-1.) Add this package to your composer.json
-
-```
-{
-    "require": {
-      "mre/phpench": "*@dev"
-    }
-}
-```
-
-2.) Install gnuplot
-
-For *Mac OS X* you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
-```
-Without X11 support:
-$ brew install gnuplot
-
-With X11 supprt (recommended!):
-$ brew install gnuplot --with-x
-```
-
-For *Linux* use your package manager.
-```
-apt-get install gnuplot
-```
-
-3.) Look at the examples for usage
-
 ## Example
 
 ```PHP
@@ -102,6 +72,36 @@ $phpench->setInput(range(1,pow(2,16), 1024));
 $phpench->setRepetitions(4);
 $phpench->run();
 ```
+
+## Installation
+
+1.) Add this package to your composer.json
+
+```
+{
+    "require": {
+      "mre/phpench": "*@dev"
+    }
+}
+```
+
+2.) Install gnuplot
+
+For *Mac OS X* you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
+```
+Without X11 support:
+$ brew install gnuplot
+
+With X11 supprt (recommended!):
+$ brew install gnuplot --with-x
+```
+
+For *Linux* use your package manager.
+```
+apt-get install gnuplot
+```
+
+3.) Look at the examples for usage
 
 ## Maintainers
 
