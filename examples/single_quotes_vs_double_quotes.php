@@ -21,7 +21,7 @@ class TestSingleQuotes extends AbstractTest
 class TestDoubleQuotes extends AbstractTest
 {
     public function execute() {
-      $test = 'hello' . 'this' . 'is' . 'a' . 'test';
+      $test = "hello" . "this" . "is" . "a" . "test";
     }
 }
 
