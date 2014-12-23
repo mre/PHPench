@@ -41,10 +41,14 @@ class TestArrayUnique extends AbstractTest
 // Create a new benchmark instance
 $phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
 
-//$oOutput = new \mre\PHPench\Output\GnuPlotOutput('test2.png', 1024, 768);
-$output = new \mre\PHPench\Output\CliOutput();
-$output->setTitle('Compare array_flip and array_unique');
-$phpench->setOutput($output);
+// Use GnuPlot for output
+$oOutput = new \mre\PHPench\Output\GnuPlotOutput('test2.png', 1024, 768);
+
+// Alternatively, print the values to the terminal
+//$oOutput = new \mre\PHPench\Output\CliOutput();
+
+$oOutput->setTitle('Compare array_flip and array_unique');
+$phpench->setOutput($oOutput);
 
 // Add your test to the instance
 $phpench->addTest(new TestArrayFlip, 'array_flip');
