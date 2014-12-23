@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-abstract class AbstractTest implements \mre\PHPench\TestInterface
+abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
 {
     protected $test;
 
@@ -11,14 +11,14 @@ abstract class AbstractTest implements \mre\PHPench\TestInterface
     }
 }
 
-class TestSingleQuotes extends AbstractTest
+class TestSingleQuotes extends AbstractBenchmark
 {
     public function execute() {
       $test = 'hello' . 'this' . 'is' . 'a' . 'test';
     }
 }
 
-class TestDoubleQuotes extends AbstractTest
+class TestDoubleQuotes extends AbstractBenchmark
 {
     public function execute() {
       $test = "hello" . "this" . "is" . "a" . "test";
@@ -34,8 +34,8 @@ $phpench->setOutput($output);
 
 
 // Add your test to the instance
-$phpench->addTest(new TestSingleQuotes, 'single_quotes');
-$phpench->addTest(new TestDoubleQuotes, 'double_quotes');
+$phpench->addBenchmark(new TestSingleQuotes, 'single_quotes');
+$phpench->addBenchmark(new TestDoubleQuotes, 'double_quotes');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

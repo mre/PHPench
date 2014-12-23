@@ -9,7 +9,7 @@ require_once __DIR__.'/../vendor/autoload.php';
  * without including its execution time. This will provide more accurate data.
  */
 
-abstract class AbstractTest implements \mre\PHPench\TestInterface
+abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
 {
     protected $test;
 
@@ -24,14 +24,14 @@ abstract class AbstractTest implements \mre\PHPench\TestInterface
     }
 }
 
-class TestArrayFlip extends AbstractTest
+class TestArrayFlip extends AbstractBenchmark
 {
     public function execute() {
         $test = array_flip(array_flip($this->test));
     }
 }
 
-class TestArrayUnique extends AbstractTest
+class TestArrayUnique extends AbstractBenchmark
 {
     public function execute() {
         $test = array_unique($this->test);
@@ -51,8 +51,8 @@ $oOutput->setTitle('Compare array_flip and array_unique');
 $phpench->setOutput($oOutput);
 
 // Add your test to the instance
-$phpench->addTest(new TestArrayFlip, 'array_flip');
-$phpench->addTest(new TestArrayUnique, 'array_unique');
+$phpench->addBenchmark(new TestArrayFlip, 'array_flip');
+$phpench->addBenchmark(new TestArrayUnique, 'array_unique');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

@@ -5,7 +5,7 @@ namespace mre;
 use mre\PHPench\Aggregator\SimpleAggregator;
 use mre\PHPench\AggregatorInterface;
 use mre\PHPench\Output\OutputInterface;
-use mre\PHPench\TestInterface;
+use mre\PHPench\BenchmarkInterface;
 use PHP_Timer;
 
 /**
@@ -69,13 +69,13 @@ class PHPench
     }
 
     /**
-     * Adds an test to the bench instance
+     * Add a function to the benchmark
      *
      * @param callable $test
      */
-    public function addTest($test, $title)
+    public function addBenchmark($test, $title)
     {
-        if (!$test instanceof \Closure && !$test instanceof TestInterface) {
+        if (!$test instanceof \Closure && !$test instanceof BenchmarkInterface) {
             throw new \InvalidArgumentException('Test must be closure or implement TestInterface');
         }
 
@@ -139,7 +139,7 @@ class PHPench
 
     private function bench($benchFunction, $i, $index)
     {
-        if ($benchFunction instanceof TestInterface) {
+        if ($benchFunction instanceof BenchmarkInterface) {
             $benchFunction->setUp($i);
             PHP_Timer::start();
             $benchFunction->execute();

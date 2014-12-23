@@ -3,14 +3,14 @@
 namespace mre\PHPench;
 
 /**
- * This is a wrapper for the tested function.
+ * This is a wrapper for the function to be benchmarked.
  *
- * This Interface can be used instead of an \Closure
- * if you need to create data before executing your test function.
+ * This Interface can be used instead of a \Closure
+ * if you need to create data before executing your benchmark function.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */
-interface TestInterface
+interface BenchmarkInterface
 {
     /**
      * Prepares the data

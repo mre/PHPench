@@ -9,7 +9,7 @@ require_once __DIR__.'/../vendor/autoload.php';
  * without including its execution time. This will provide more accurate data.
  */
 
-abstract class AbstractTest implements \mre\PHPench\TestInterface
+abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
 {
     protected $test;
 
@@ -23,7 +23,7 @@ abstract class AbstractTest implements \mre\PHPench\TestInterface
     }
 }
 
-class TestBubbleSort extends AbstractTest
+class TestBubbleSort extends AbstractBenchmark
 {
     private function bubblesort($arr = array ()) {
         $anz = count($arr);
@@ -45,7 +45,7 @@ class TestBubbleSort extends AbstractTest
     }
 }
 
-class TestQuickSort extends AbstractTest
+class TestQuickSort extends AbstractBenchmark
 {
     private function quicksort($seq) {
         if(!count($seq)) return $seq;
@@ -74,8 +74,8 @@ $output->setTitle('Sorting Algorithms');
 $phpench->setOutput($output);
 
 // Add your test to the instance
-$phpench->addTest(new TestBubbleSort, 'bubblesort');
-$phpench->addTest(new TestQuickSort, 'quicksort');
+$phpench->addBenchmark(new TestBubbleSort, 'bubblesort');
+$phpench->addBenchmark(new TestQuickSort, 'quicksort');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify
