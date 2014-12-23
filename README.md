@@ -41,46 +41,66 @@ apt-get install gnuplot
 ```PHP
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-// setup our test data
-function createArray($arrSize)
+/*
+ * You can use an closure or a class that implements TestInterface.
+ *
+ * Data that will be processed by the tested function can be executed
+ * without including its execution time. This will provide more accurate data.
+ */
+
+abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
 {
-    $test = array();
-    for ($i=1; $i<$arrSize; $i++) {
-        $test[$i]= $arrSize % $i;
-    }
+    protected $test;
 
-  return $test;
+    function setUp($arrSize)
+    {
+        $this->test = array();
+        for ($i=1; $i<$arrSize; $i++) {
+            $this->test[$i]= $arrSize % $i;
+        }
+
+        return $this->test;
+    }
 }
 
-/**
- * These are the functions that we want to benchmark
- *
- * This test compares array_flip vs array_unique
- */
-$benchFunction1 = function ($arrSize) {
-    $test = createArray($arrSize);
-    $test = array_flip(array_flip($test));
-};
-$benchFunction2 = function ($arrSize) {
-    $test = createArray($arrSize);
-    $test = array_unique($test);
-};
+class TestArrayFlip extends AbstractBenchmark
+{
+    public function execute() {
+        $test = array_flip(array_flip($this->test));
+    }
+}
+
+class TestArrayUnique extends AbstractBenchmark
+{
+    public function execute() {
+        $test = array_unique($this->test);
+    }
+}
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench('Compare array_flip and array_unique');
+$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
+
+// Use GnuPlot for output
+$oOutput = new \mre\PHPench\Output\GnuPlotOutput('test2.png', 1024, 768);
+
+// Alternatively, print the values to the terminal
+//$oOutput = new \mre\PHPench\Output\CliOutput();
+
+$oOutput->setTitle('Compare array_flip and array_unique');
+$phpench->setOutput($oOutput);
 
 // Add your test to the instance
-$phpench->addTest($benchFunction1, 'array_flip');
-$phpench->addTest($benchFunction2, 'array_unique');
+$phpench->addBenchmark(new TestArrayFlip, 'array_flip');
+$phpench->addBenchmark(new TestArrayUnique, 'array_unique');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify
 // the start, end and step for each call
 $phpench->setInput(range(1,pow(2,16), 1024));
+$phpench->setRepetitions(4);
 $phpench->run();
-$phpench->save('test.png', 1024, 768);
 ```
 
 ## Maintainers
