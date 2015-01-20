@@ -50,7 +50,7 @@ class BenchmarkArrayUnique extends AbstractBenchmark
 }
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
+$phpench = new \mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
 
 // Use GnuPlot for output
 $oOutput = new \mre\PHPench\Output\GnuPlotOutput('test2.png', 1024, 768);
