@@ -1,0 +1,10 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+matrix:
+    before_script:
+      - wget -nc http://getcomposer.org/composer.phar
+      - php composer.phar install --dev
+    script: phpunit
