@@ -7,4 +7,4 @@ matrix:
     before_script:
       - wget -nc http://getcomposer.org/composer.phar
       - php composer.phar install --dev
-    script: phpunit
+    script: bin/phpunit test

@@ -21,9 +21,15 @@
             "mre": "src/"
         }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "require": {
         "php": ">=5.4.0",
         "gregwar/gnuplot": "*@dev",
         "phpunit/php-timer": "*@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*"
     }
 }
