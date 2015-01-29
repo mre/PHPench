@@ -8,7 +8,12 @@
         {
             "name": "Matthias Endler",
             "email": "matthias-endler@gmx.net",
-            "homepage": "http://www.matthias-endler.de/"
+            "homepage": "http://www.matthias-endler.de"
+        },
+        {
+            "name": "Markus Poerschke",
+            "email": "markus@eluceo.de",
+            "homepage": "http://twitter.com/markuspoerschke"
         }
     ],
     "autoload": {
