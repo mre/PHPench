@@ -3,8 +3,10 @@ language: php
 php:
   - 5.4
   - 5.5
-matrix:
-    before_script:
-      - wget -nc http://getcomposer.org/composer.phar
-      - php composer.phar install --dev
-    script: bin/phpunit test
+  - 5.6
+  - hhvm
+
+before_script:
+  - composer install
+
+script: ./bin/phpunit test/
