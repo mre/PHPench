@@ -10,16 +10,14 @@ out of the result.
 
 ## Why is it useful?
 
-Two reasons:
-
-### Algorithms are beautiful
+#### Algorithms are beautiful
 
 Sometimes the difference between two algorithms is hard to explain but easy to show.  
 For instance, take two sorting algorithms which both have a best-case
 runtime of `O(n)`. Depending on the input, one can be much faster than the
 other. This tools helps you see what's going on.
 
-### Death to premature-optimizations
+#### Death to premature-optimizations
 
 Whenever people tell you that using single quotes instead of double quotes
 around strings is a performance improvement, it's time to debunk some myths.
