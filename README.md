@@ -24,6 +24,7 @@ around strings is a performance improvement, it's time to debunk some myths.
 Most of the time such programmer folklore turns out to be misguided and can actually be pretty harmful.
 "Premature emphasis on efficiency is a big mistake which may well be the source
 of most programming complexity and grief." (Donald Knuth)
+Let's be professionals. Let's measure.
 
 ## Example
 
