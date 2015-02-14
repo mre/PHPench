@@ -14,7 +14,7 @@ out of the result.
 
 Sometimes the difference between two algorithms is hard to explain but easy to show.  
 For instance, take two sorting algorithms which both have a best-case
-runtime of `O(n)`. Depending on the input, one can be much faster than the
+runtime of `O(n*log n)`. Depending on the input, one can be much faster than the
 other. This tools helps you see what's going on.
 
 #### Death to premature-optimizations
