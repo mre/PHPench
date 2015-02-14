@@ -28,6 +28,8 @@ Let's be professionals. Let's measure.
 
 ## Example
 
+Using PHPench feels a bit like writing a visual unit test. Check it out:  
+
 ```PHP
 <?php
 
