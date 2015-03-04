@@ -14,18 +14,21 @@ out of the result.
 
 Sometimes the difference between two algorithms is hard to explain but easy to show.  
 For instance, take two sorting algorithms which both have a best-case
-runtime of `O(n)`. Depending on the input, one can be much faster than the
+runtime of `O(n*log n)`. Depending on the input, one can be much faster than the
 other. This tools helps you see what's going on.
 
 #### Death to premature-optimizations
 
 Whenever people tell you that using single quotes instead of double quotes
 around strings is a performance improvement, it's time to debunk some myths.
-Most of the time such programmer folklore turns out to be misguided and can actually be pretty harmful.
-"Premature emphasis on efficiency is a big mistake which may well be the source
-of most programming complexity and grief." (Donald Knuth)
+Most of the time such programmer folklore turns out to be misguided and can actually be pretty harmful.  
+*"Premature emphasis on efficiency is a big mistake which may well be the source
+of most programming complexity and grief."* (Donald Knuth)  
+Let's be professionals. Let's measure.
 
 ## Example
+
+Using PHPench feels a bit like writing a visual unit test. Check it out:  
 
 ```PHP
 <?php
