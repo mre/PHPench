@@ -70,7 +70,8 @@ class PHPench
     /**
      * Add a function to the benchmark
      *
-     * @param callable $test
+     * @param callable|BenchmarkInterface $test
+     * @param string $title
      */
     public function addBenchmark($test, $title)
     {
