@@ -3,14 +3,14 @@
 namespace mre\PHPench;
 
 /**
- * Aggregates the data from the test results
+ * Aggregates the data from the test results.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */
 interface AggregatorInterface
 {
     /**
-     * Adds a new value to the aggregator
+     * Adds a new value to the aggregator.
      *
      * @param $i
      * @param $index

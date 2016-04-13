@@ -5,7 +5,7 @@ namespace mre\PHPench\Aggregator;
 use mre\PHPench\AggregatorInterface;
 
 /**
- * Simple aggregator that will simply replace the data
+ * Simple aggregator that will simply replace the data.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */

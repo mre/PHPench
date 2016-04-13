@@ -13,14 +13,14 @@ namespace mre\PHPench;
 interface BenchmarkInterface
 {
     /**
-     * Prepares the data
+     * Prepares the data.
      *
      * @param $i
      */
     public function setUp($i);
 
     /**
-     * Calls the tested function
+     * Calls the tested function.
      */
     public function execute();
 }

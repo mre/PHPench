@@ -2,7 +2,6 @@
 
 namespace mre\PHPench\Output;
 
-
 use Gregwar\GnuPlot\GnuPlot;
 use mre\PHPench\AggregatorInterface;
 
@@ -26,7 +25,7 @@ class GnuPlotOutput extends OutputAbstract
      * @param int $width
      * @param int $height
      */
-    function __construct($filename, $width = 400, $height = 300)
+    public function __construct($filename, $width = 400, $height = 300)
     {
         $this->plot = new GnuPlot();
 
@@ -36,10 +35,11 @@ class GnuPlotOutput extends OutputAbstract
     }
 
     /**
-     * Updates plot data
+     * Updates plot data.
      *
      * @param AggregatorInterface $aggregator
      * @param $i
+     *
      * @return mixed|void
      */
     public function update(AggregatorInterface $aggregator, $i)
@@ -63,11 +63,12 @@ class GnuPlotOutput extends OutputAbstract
         $this->plot->refresh();
     }
 
-
     /**
-     * This method will save the graph as a PNG image
+     * This method will save the graph as a PNG image.
+     *
      * @param AggregatorInterface $aggregator
      * @param $i
+     *
      * @return mixed|void
      */
     public function finalize(AggregatorInterface $aggregator, $i)
@@ -78,5 +79,4 @@ class GnuPlotOutput extends OutputAbstract
             ->setHeight($this->height)
             ->writePng($this->filename);
     }
-
-} 
+}

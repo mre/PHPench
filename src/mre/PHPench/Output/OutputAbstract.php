@@ -2,18 +2,17 @@
 
 namespace mre\PHPench\Output;
 
-
-abstract class OutputAbstract implements OutputInterface{
-
+abstract class OutputAbstract implements OutputInterface
+{
     /**
-     * The title of the benchmark
+     * The title of the benchmark.
      *
      * @var string
      */
     protected $title = 'untitled';
 
     /**
-     * Tests titles
+     * Tests titles.
      *
      * @var array
      */
@@ -28,5 +27,4 @@ abstract class OutputAbstract implements OutputInterface{
     {
         $this->tests_titles[] = $tests_titles;
     }
-
-} 
+}

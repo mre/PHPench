@@ -1,10 +1,11 @@
 <?php
 
 namespace mre\PHPench\Aggregator;
+
 use mre\PHPench\AggregatorInterface;
 
 /**
- * The average of the data will be calculated
+ * The average of the data will be calculated.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */
@@ -14,8 +15,7 @@ class AverageAggregator implements AggregatorInterface
 
     public function push($i, $index, $value)
     {
-        if (!isset($this->data[$i][$index]))
-        {
+        if (!isset($this->data[$i][$index])) {
             $this->data[$i][$index] = $value;
 
             return;

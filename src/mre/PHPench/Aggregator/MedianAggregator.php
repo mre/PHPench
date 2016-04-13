@@ -6,7 +6,7 @@ use mre\PHPench\AggregatorInterface;
 use mre\PHPench\Util\Math;
 
 /**
- * The average of the data will be calculated
+ * The average of the data will be calculated.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */

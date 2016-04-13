@@ -9,7 +9,7 @@ use mre\PHPench\BenchmarkInterface;
 use PHP_Timer;
 
 /**
- * PHPench
+ * PHPench.
  *
  * This class provides the core functionality for the PHPench package.
  *
@@ -28,7 +28,7 @@ class PHPench
     private $output = null;
 
     /**
-     * Contains an array with the run numbers
+     * Contains an array with the run numbers.
      *
      * @var array
      */
@@ -58,7 +58,7 @@ class PHPench
     }
 
     /**
-     * sets output interface
+     * sets output interface.
      *
      * @param OutputInterface $output
      */
@@ -68,10 +68,10 @@ class PHPench
     }
 
     /**
-     * Add a function to the benchmark
+     * Add a function to the benchmark.
      *
      * @param callable|BenchmarkInterface $test
-     * @param string $title
+     * @param string                      $title
      */
     public function addBenchmark($test, $title)
     {
@@ -84,14 +84,13 @@ class PHPench
     }
 
     /**
-     * Plots the graph for all added tests
+     * Plots the graph for all added tests.
      *
      * @param bool $keepAlive
      */
     public function run($keepAlive = false)
     {
-        for ($r = 1; $r <= $this->repetitions; $r++)
-        {
+        for ($r = 1; $r <= $this->repetitions; ++$r) {
             foreach ($this->input as $i) {
                 foreach ($this->tests as $index => $test) {
                     $this->bench($test, $i, $index);
@@ -105,11 +104,10 @@ class PHPench
 
         if ($keepAlive) {
             // Wait for user input to close
-            echo "Press enter to quit.";
+            echo 'Press enter to quit.';
             fgets(STDIN);
         }
     }
-
 
     /**
      * @param array $input

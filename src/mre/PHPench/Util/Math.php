@@ -3,16 +3,17 @@
 namespace mre\PHPench\Util;
 
 /**
- * Provides some methods for mathematical operations
+ * Provides some methods for mathematical operations.
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */
 class Math
 {
     /**
-     * Calculates the median of the given array
+     * Calculates the median of the given array.
      *
      * @param array $input
+     *
      * @return float
      */
     public static function median(array $input)
@@ -26,11 +27,12 @@ class Math
         }
 
         // cleanup input array
-        $input  = array_values($input);
+        $input = array_values($input);
         sort($input, SORT_NUMERIC);
 
         if ($count % 2 === 0) {
             $center = (int) floor($count / 2);
+
             return ($input[$center - 1] + $input[$center]) / 2;
         }
 
