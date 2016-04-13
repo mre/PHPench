@@ -21,7 +21,6 @@ use PHP_Timer;
 class PHPench
 {
     private $tests = [];
-    private $titles = [];
 
     /**
      * @var OutputInterface
@@ -126,16 +125,6 @@ class PHPench
     {
         $this->repetitions = $repetitions;
     }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-
 
     private function bench($benchFunction, $i, $index)
     {
