@@ -107,15 +107,15 @@ $phpench->run();
 }
 ```
 
-2.) Install gnuplot
+2.) Install gnuplot (Version 4.6)
 
 For *Mac OS X* you can install gnuplot via homebrew. For live generated charts you also need to install XQuartz.
 ```
 Without X11 support:
-$ brew install gnuplot
+$ brew install homebrew/versions/gnuplot4
 
 With X11 supprt (recommended!):
-$ brew install gnuplot --with-x
+$ brew install homebrew/versions/gnuplot4 --with-x11
 ```
 
 For *Linux* use your package manager.
