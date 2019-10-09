@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace mre\PHPench\Output;
 
@@ -10,8 +10,9 @@ class CliOutput extends OutputAbstract
      * Displays execution information.
      *
      * @param AggregatorInterface $aggregator
+     * @param mixed               $i
      */
-    public function update(AggregatorInterface $aggregator, $i)
+    public function update(AggregatorInterface $aggregator, $i): void
     {
         printf('Executed repetitions: %s'.PHP_EOL, $i);
 
@@ -22,8 +23,9 @@ class CliOutput extends OutputAbstract
 
     /**
      * @param AggregatorInterface $aggregator
+     * @param mixed               $i
      */
-    public function finalize(AggregatorInterface $aggregator, $i)
+    public function finalize(AggregatorInterface $aggregator, $i): void
     {
         printf('Done');
     }

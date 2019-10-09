@@ -1,0 +1,101 @@
+<?php
+/*
+ * This document has been generated with
+ * https://mlocati.github.io/php-cs-fixer-configurator/?version=2.15#configurator
+ * you can change this configuration by importing this file.
+ */
+return PhpCsFixer\Config::create()->setRiskyAllowed(true)->setRules(
+    [
+        '@PSR1'                                 => true,
+        '@PSR2'                                 => true,
+        // Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.
+        'align_multiline_comment'               => ['comment_type' => 'phpdocs_like'],
+        // PHP arrays should be declared using the configured syntax.
+        'array_syntax'                          => ['syntax' => 'short'],
+        // Binary operators should be surrounded by space as configured.
+        'binary_operator_spaces'                => [
+            'align_double_arrow' => true,
+            'align_equals'       => false,
+        ],
+        // An empty line feed should precede a return statement.
+        'blank_line_before_return'              => true,
+        // Concatenation should be spaced according configuration.
+        'concat_space'                          => false,
+        // Equal sign in declare statement should be surrounded by spaces or not following configuration.
+        'declare_equal_normalize'               => false,
+        // Force strict types declaration in all files.
+        // Requires PHP >= 7.0.
+        'declare_strict_types'                  => true,
+        // Transforms imported FQCN parameters and return types in function arguments to short version.
+        'fully_qualified_strict_types'          => true,
+        // All instances created with new keyword must be followed by braces.
+        'new_with_braces'                       => true,
+        // There should not be blank lines between docblock and the documented element.
+        'no_blank_lines_after_phpdoc'           => true,
+        // There should not be any empty comments.
+        'no_empty_comment'                      => true,
+        // There should not be empty PHPDoc blocks.
+        'no_empty_phpdoc'                       => true,
+        // Remove useless semicolon statements.
+        'no_empty_statement'                    => true,
+        // Remove trailing commas in list function calls.
+        'no_trailing_comma_in_list_call'        => true,
+        // PHP single-line arrays should not have trailing comma.
+        'no_trailing_comma_in_singleline_array' => true,
+        // Removes unneeded curly braces that are superfluous and aren't part of a control structure's body.
+        'no_unneeded_curly_braces'              => true,
+        // There should not be useless `else` cases.
+        'no_useless_else'                       => true,
+        // There should not be an empty `return` statement at the end of a function.
+        'no_useless_return'                     => true,
+        // Array index should always be written by using square braces.
+        'normalize_index_brace'                 => true,
+        // PHPDoc should contain `@param` for all params.
+        'phpdoc_add_missing_param_annotation'   => true,
+        // All items of the given phpdoc tags must be either left-aligned or (by default) aligned vertically.
+        'phpdoc_align'                          => true,
+        // PHPDoc annotation descriptions should not be a sentence.
+        'phpdoc_annotation_without_dot'         => true,
+        // Docblocks should have the same indentation as the documented subject.
+        'phpdoc_indent'                         => true,
+        // Fix PHPDoc inline tags, make `@inheritdoc` always inline.
+        'phpdoc_inline_tag'                     => true,
+        // `@access` annotations should be omitted from PHPDoc.
+        'phpdoc_no_access'                      => true,
+        // `@return void` and `@return null` annotations should be omitted from PHPDoc.
+        'phpdoc_no_empty_return'                => true,
+        // `@package` and `@subpackage` annotations should be omitted from PHPDoc.
+        'phpdoc_no_package'                     => true,
+        // Classy that does not inherit must not have `@inheritdoc` tags.
+        'phpdoc_no_useless_inheritdoc'          => true,
+        // Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.
+        'phpdoc_order'                          => true,
+        // Scalar types should always be written in the same form.
+        // `int` not `integer`, `bool` not `boolean`, `float` not `real` or `double`.
+        'phpdoc_scalar'                         => true,
+        // Single line `@var` PHPDoc should have proper spacing.
+        'phpdoc_single_line_var_spacing'        => true,
+        // PHPDoc summary should end in either a full stop, exclamation mark, or question mark.
+        'phpdoc_summary'                        => true,
+        // Docblocks should only be used on structural elements.
+        'phpdoc_to_comment'                     => true,
+        // PHPDoc should start and end with content, excluding the very first and last line of the docblocks.
+        'phpdoc_trim'                           => true,
+        // The correct case must be used for standard PHP types in PHPDoc.
+        'phpdoc_types'                          => true,
+        // There should be one or no space before colon, and one space after it in return type declarations, according to configuration.
+        'return_type_declaration'               => true,
+        // Replace all `<>` with `!=`.
+        'standardize_not_equals'                => true,
+        // Comparisons should be strict.
+        'strict_comparison'                     => true,
+        // PHP multi-line arrays should have a trailing comma.
+        'trailing_comma_in_multiline_array'     => true,
+        // Add void return type to functions with missing or empty return statements, but priority is given to `@return` annotations.
+        // Requires PHP >= 7.1.
+        'void_return'                           => true,
+        // Write conditions in Yoda style (`true`), non-Yoda style (`false`) or ignore those conditions (`null`) based on configuration.
+        'yoda_style'                            => true,
+    ]
+)->setFinder(PhpCsFixer\Finder::create()->exclude('vendor')->in(__DIR__))
+    ;

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace mre\PHPench\Util;
 
@@ -22,7 +22,7 @@ class Math
 
         if ($count < 1) {
             return 0;
-        } elseif ($count === 1) {
+        } elseif (1 === $count) {
             return reset($input);
         }
 
@@ -30,7 +30,7 @@ class Math
         $input = array_values($input);
         sort($input, SORT_NUMERIC);
 
-        if ($count % 2 === 0) {
+        if (0 === $count % 2) {
             $center = (int) floor($count / 2);
 
             return ($input[$center - 1] + $input[$center]) / 2;
