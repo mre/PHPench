@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace mre\PHPench\Output;
 
@@ -19,13 +19,20 @@ class GnuPlotOutput extends OutputAbstract
      * @var int
      */
     private $height;
+    /**
+     * @var GnuPlot
+     */
+    private $plot;
+
+    /** @var int */
+    private $precision = 14;
 
     /**
-     * @param $filename
-     * @param int $width
-     * @param int $height
+     * @param string $filename
+     * @param int    $width
+     * @param int    $height
      */
-    public function __construct($filename, $width = 400, $height = 300)
+    public function __construct(string $filename, int $width = 400, int $height = 300)
     {
         $this->plot = new GnuPlot();
 
@@ -38,7 +45,7 @@ class GnuPlotOutput extends OutputAbstract
      * Updates plot data.
      *
      * @param AggregatorInterface $aggregator
-     * @param $i
+     * @param int                 $i
      *
      * @return mixed|void
      */
@@ -54,13 +61,14 @@ class GnuPlotOutput extends OutputAbstract
             $this->plot->setTitle($index, $title);
         }
 
-        foreach ($aggregator->getData() as $i => $results) {
+        $data = $aggregator->getData();
+        foreach ($data as $pos => $results) {
             foreach ($results as $index => $resultValue) {
-                $this->plot->push($i, $resultValue, $index);
+                $this->plot->push($pos, number_format($resultValue, $this->precision), $index);
             }
         }
 
-        $this->plot->refresh();
+        $this->plot->plot();
     }
 
     /**
@@ -78,5 +86,17 @@ class GnuPlotOutput extends OutputAbstract
         $this->plot->setWidth($this->width)
             ->setHeight($this->height)
             ->writePng($this->filename);
+    }
+
+    /**
+     * @param int $precision
+     *
+     * @return GnuPlotOutput
+     */
+    public function setPrecision(int $precision): GnuPlotOutput
+    {
+        $this->precision = $precision;
+
+        return $this;
     }
 }
