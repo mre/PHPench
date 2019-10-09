@@ -26,16 +26,10 @@
     },
     "require": {
         "php": ">=7.2.0",
-        "gregwar/gnuplot": "*@dev",
+        "abbadon1334/gnuplot": "*@dev",
         "phpunit/php-timer": "*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../GnuPlot"
-        }
-    ]
+    }
 }
