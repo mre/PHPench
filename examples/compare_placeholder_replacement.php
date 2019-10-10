@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -14,7 +14,7 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
     protected $text;
     protected $placeholders;
 
-    public function setUp($arrSize)
+    public function setUp($arrSize): void
     {
         $this->text = $this->createText(10);
         $this->placeholders = $this->createPlaceholders($arrSize);
@@ -45,7 +45,8 @@ abstract class AbstractBenchmark implements \mre\PHPench\BenchmarkInterface
 
 class BenchmarkStringReplaceForeach extends AbstractBenchmark
 {
-    public function execute() {
+    public function execute(): void
+    {
         foreach ($this->placeholders as $search => $replace) {
             $this->text = str_replace($search, $replace, $this->text);
         }
@@ -54,30 +55,32 @@ class BenchmarkStringReplaceForeach extends AbstractBenchmark
 
 class BenchmarkStringReplaceArrayValue extends AbstractBenchmark
 {
-    public function execute() {
+    public function execute(): void
+    {
         $this->text = str_replace(array_keys($this->placeholders), array_values($this->placeholders), $this->text);
     }
 }
 
 class BenchmarkPregReplaceCallback extends AbstractBenchmark
 {
-    public function execute() {
-        $this->text = preg_replace_callback('/(\$[\w\d]+)\s/', function($matches) {
+    public function execute(): void
+    {
+        $this->text = preg_replace_callback('/(\$[\w\d]+)\s/', function ($matches) {
             return isset($this->placeholders[$matches[0]]) ? $this->placeholders[$matches[0]] : $matches[0];
         }, $this->text);
     }
 }
 
 // Create a new benchmark instance
-$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator);
+$phpench = new mre\PHPench(new \mre\PHPench\Aggregator\MedianAggregator());
 $output = new \mre\PHPench\Output\GnuPlotOutput('test3.png', 1024, 768);
 $output->setTitle('Compare placeholder replacement');
 $phpench->setOutput($output);
 
 // Add your test to the instance
-$phpench->addBenchmark(new BenchmarkStringReplaceForeach, 'TestStringReplaceForeach');
-$phpench->addBenchmark(new BenchmarkStringReplaceArrayValue, 'TestStringReplaceArrayValue');
-$phpench->addBenchmark(new BenchmarkPregReplaceCallback, 'TestPregReplaceCallback');
+$phpench->addBenchmark(new BenchmarkStringReplaceForeach(), 'TestStringReplaceForeach');
+$phpench->addBenchmark(new BenchmarkStringReplaceArrayValue(), 'TestStringReplaceArrayValue');
+$phpench->addBenchmark(new BenchmarkPregReplaceCallback(), 'TestPregReplaceCallback');
 
 // Run the benchmark and plot the results in realtime.
 // With the second parameter you can specify

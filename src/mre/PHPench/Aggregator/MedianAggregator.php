@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace mre\PHPench\Aggregator;
 
@@ -14,7 +14,7 @@ class MedianAggregator implements AggregatorInterface
 {
     private $data = [];
 
-    public function push($i, $index, $value)
+    public function push($i, $index, $value): void
     {
         $this->data[$i][$index][] = $value;
     }

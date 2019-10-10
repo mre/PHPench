@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace mre;
 
@@ -6,7 +6,7 @@ use mre\PHPench\Aggregator\SimpleAggregator;
 use mre\PHPench\AggregatorInterface;
 use mre\PHPench\Output\OutputInterface;
 use mre\PHPench\BenchmarkInterface;
-use PHP_Timer;
+use SebastianBergmann\Timer\Timer;
 
 /**
  * PHPench.
@@ -50,7 +50,7 @@ class PHPench
 
     public function __construct(AggregatorInterface $aggregator = null)
     {
-        if ($aggregator === null) {
+        if (null === $aggregator) {
             $aggregator = new SimpleAggregator();
         }
 
@@ -62,7 +62,7 @@ class PHPench
      *
      * @param OutputInterface $output
      */
-    public function setOutput(OutputInterface $output)
+    public function setOutput(OutputInterface $output): void
     {
         $this->output = $output;
     }
@@ -73,7 +73,7 @@ class PHPench
      * @param callable|BenchmarkInterface $test
      * @param string                      $title
      */
-    public function addBenchmark($test, $title)
+    public function addBenchmark($test, $title): void
     {
         if (!$test instanceof \Closure && !$test instanceof BenchmarkInterface) {
             throw new \InvalidArgumentException('Test must be closure or implement TestInterface');
@@ -88,7 +88,7 @@ class PHPench
      *
      * @param bool $keepAlive
      */
-    public function run($keepAlive = false)
+    public function run($keepAlive = false): void
     {
         for ($r = 1; $r <= $this->repetitions; ++$r) {
             foreach ($this->input as $i) {
@@ -112,7 +112,7 @@ class PHPench
     /**
      * @param array $input
      */
-    public function setInput(array $input)
+    public function setInput(array $input): void
     {
         $this->input = $input;
     }
@@ -120,22 +120,22 @@ class PHPench
     /**
      * @param $repetitions
      */
-    public function setRepetitions($repetitions)
+    public function setRepetitions($repetitions): void
     {
         $this->repetitions = $repetitions;
     }
 
-    private function bench($benchFunction, $i, $index)
+    private function bench($benchFunction, $i, $index): void
     {
         if ($benchFunction instanceof BenchmarkInterface) {
             $benchFunction->setUp($i);
-            PHP_Timer::start();
+            Timer::start();
             $benchFunction->execute();
-            $time = PHP_Timer::stop();
+            $time = Timer::stop();
         } else {
-            PHP_Timer::start();
+            Timer::start();
             $benchFunction($i);
-            $time = PHP_Timer::stop();
+            $time = Timer::stop();
         }
 
         $this->aggregator->push($i, $index, $time);
